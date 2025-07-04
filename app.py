@@ -1,24 +1,34 @@
 from flask import Flask, request, jsonify
-from youtube_service import YouTubeService
+import yt_dlp
 
 app = Flask(__name__)
-youtube_service = YouTubeService()
 
-@app.route('/api/video-info')
-def get_video_info():
-    url = request.args.get('url')
-    if not url:
-        return jsonify({'success': False, 'error': 'Missing required parameter: url'}), 400
+@app.route("/")
+def home():
+    return jsonify({"status": "ok", "message": "YouTube Preview API working."})
 
-    if not youtube_service.is_valid_youtube_url(url):
-        return jsonify({'success': False, 'error': 'Invalid YouTube URL'}), 400
+@app.route("/api/preview", methods=["GET"])
+def preview():
+    video_url = request.args.get("url")
+    if not video_url:
+        return jsonify({"error": "Missing YouTube URL"}), 400
+
+    ydl_opts = {
+        'quiet': True,
+        'format': 'best[ext=mp4][vcodec!=none][acodec!=none]/best',
+        'skip_download': True,
+    }
 
     try:
-        video_info = youtube_service.get_video_info(url)
-        return jsonify({'success': True, 'data': video_info})
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(video_url, download=False)
+            result = {
+                "title": info.get("title"),
+                "thumbnail": info.get("thumbnail"),
+                "duration": info.get("duration"),
+                "preview_url": info.get("url"),
+                "format": info.get("format_note"),
+            }
+            return jsonify(result)
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
-
-@app.route('/health')
-def health_check():
-    return jsonify({'status': 'ok'})
+        return jsonify({"error": str(e)}), 500
