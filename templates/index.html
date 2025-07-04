@@ -1,29 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>YouTube Video Info Proxy</title>
+    <meta charset="UTF-8">
+    <title>YouTube Video Info API (Proxy)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        input[type="text"] { width: 400px; padding: 8px; }
-        button { padding: 8px 16px; }
-        pre { background: #f0f0f0; padding: 10px; margin-top: 20px; white-space: pre-wrap; word-wrap: break-word; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f9fafb;
+            color: #111827;
+            padding: 40px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        p.description {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4b5563;
+        }
+        .note {
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 12px;
+            margin-bottom: 30px;
+            border-radius: 6px;
+            font-size: 15px;
+            color: #0369a1;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        pre {
+            background: #f3f4f6;
+            padding: 16px;
+            margin-top: 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            max-height: 500px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
-    <h2>YouTube Video Info (Proxy API)</h2>
-    <form id="form">
-        <input type="text" id="url" placeholder="Enter YouTube URL" required />
-        <button type="submit">Get Info</button>
-    </form>
-    <pre id="result"></pre>
+    <div class="container">
+        <h1>YouTube Video Info Proxy API</h1>
+        <p class="description">
+            This is a simple proxy API that fetches video/audio format data from a main YouTube API hosted on Railway.
+        </p>
+
+        <div class="note">
+            ✅ <strong>API Type:</strong> <code>GET</code> request<br>
+            📥 <strong>Endpoint:</strong> <code>/api/video-info?url=YOUTUBE_LINK</code><br>
+            🌐 <strong>Returns:</strong> JSON with audio/video information.<br><br>
+            Example call:<br>
+            <code>/api/video-info?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ</code>
+        </div>
+
+        <form id="form">
+            <input type="text" id="url" placeholder="Paste YouTube video URL here..." required />
+            <button type="submit">Fetch Video Info</button>
+        </form>
+
+        <pre id="result">API response will appear here...</pre>
+    </div>
+
+    <footer>
+      &copy; 2025 All copyright reserved by <a href="https://t.me/bro_bin_lagbe">@bro_bin_lagbe</a>
+    </footer>
 
     <script>
         document.getElementById("form").addEventListener("submit", async function(e) {
             e.preventDefault();
             const url = document.getElementById("url").value;
-            const res = await fetch(`/api/video-info?url=${encodeURIComponent(url)}`);
-            const data = await res.json();
-            document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+            document.getElementById("result").textContent = "Fetching...";
+            try {
+                const res = await fetch(`/api/video-info?url=${encodeURIComponent(url)}`);
+                const data = await res.json();
+                document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById("result").textContent = "Error fetching data!";
+            }
         });
     </script>
 </body>
