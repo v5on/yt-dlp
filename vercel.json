@@ -7,9 +7,7 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/video-info",
-      "dest": "app.py"
-    }
+    { "src": "/api/video-info", "dest": "app.py" },
+    { "src": "/", "dest": "app.py" }
   ]
 }
