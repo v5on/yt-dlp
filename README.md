@@ -1,33 +1,29 @@
 # 🎬 YouTube Video Info & Audio Downloader API (yt-dlp-smoky)
 
-A lightweight proxy API built with `yt-dlp`, deployed on **Vercel**, which allows you to fetch public YouTube video metadata and audio download links in JSON format.
+A lightweight proxy API built with [`yt-dlp`](https://github.com/yt-dlp/yt-dlp), deployed on **Vercel**, which allows you to fetch YouTube video metadata and audio download links in structured JSON format.
 
 ---
 
 ## 📌 Features
 
 - ✅ Get video title, description, channel info, thumbnail, views, likes
-- 🎧 Audio-only formats with quality labels & direct download URLs
-- ⚡ Fast response (API hosted on Vercel)
-- 🧩 Perfect for Telegram bots, downloaders, or preview apps
+- 🎧 Extract audio-only formats (MP3/WEBM) with quality labels & direct download URLs
+- ⚡ Blazing fast response (serverless deployment on Vercel)
+- 🧩 Ideal for Telegram bots, preview websites, and lightweight apps
 
 ---
 
 ## 🔗 API Endpoint
 
+```http
 GET https://yt-dlp-smoky.vercel.app/?url=YOUTUBE_VIDEO_LINK
+```
 
-shell
-Copy
-Edit
+### 📥 Example
 
-### 📥 Example:
-
+```http
 https://yt-dlp-smoky.vercel.app/?url=https://www.youtube.com/watch?v=wac5bAJydc8
-
-bash
-Copy
-Edit
+```
 
 ---
 
@@ -57,50 +53,61 @@ Edit
           "type": "audio_only",
           "format_id": "250-drc",
           "url": "https://..."
-        },
-        ...
+        }
       ]
     }
   }
 }
+```
 
+---
 
-# 📂 Response Structure
-Field	Description
-title	YouTube video title
-channel	Channel name
-channel_id	YouTube handle (@username)
-description	Full description text
-duration	Duration in seconds
-view_count	Total view count
-like_count	Total likes
-upload_date	Date in YYYYMMDD format
-thumbnail	Max resolution thumbnail URL
-formats.audio	List of audio formats with direct URLs
+## 📂 Response Structure
 
-# 💡 Use Cases
-Telegram bots for YouTube preview/download
+| Field           | Description                          |
+|-----------------|--------------------------------------|
+| `title`         | YouTube video title                  |
+| `channel`       | Channel name                         |
+| `channel_id`    | YouTube handle (@username)           |
+| `description`   | Full description text                |
+| `duration`      | Duration in seconds                  |
+| `view_count`    | Total view count                     |
+| `like_count`    | Total likes                          |
+| `upload_date`   | Date in `YYYYMMDD` format            |
+| `thumbnail`     | Max resolution thumbnail URL         |
+| `formats.audio` | List of audio formats with direct URLs |
 
-Serverless YouTube metadata fetcher
+---
 
-Audio extractor for media apps
+## 💡 Use Cases
 
-Data enrichment from YouTube videos
+- Telegram bots for YouTube preview/download
+- Serverless YouTube metadata fetcher
+- Audio extractor for media apps
+- Data enrichment from YouTube videos
 
-# 🚀 Deploy Your Own (Optional)
-You can clone this project and deploy on Vercel yourself.
+---
 
-bash
-Copy
-Edit
+## 🚀 Deploy Your Own (Optional)
+
+You can clone this project and deploy on Vercel yourself:
+
+```bash
 git clone https://github.com/yourname/yt-dlp-vercel-api
 cd yt-dlp-vercel-api
 vercel deploy
+```
 
-# 🙋 Support
-For support or questions, reach out via Telegram:
-# 📬 @bro_bin_lagbe
+---
 
-# 📜 License
-This project is intended for educational and personal use only.
+## 🙋 Support
+
+For support or questions, reach out via Telegram:  
+📬 [@bro_bin_lagbe](https://t.me/bro_bin_lagbe)
+
+---
+
+## 📜 License
+
+This project is intended for **educational and personal** use only.  
 You are responsible for how you use the data fetched via this API.
