@@ -63,7 +63,9 @@ Edit
     }
   }
 }
-📂 Response Structure
+
+
+# 📂 Response Structure
 Field	Description
 title	YouTube video title
 channel	Channel name
@@ -76,7 +78,7 @@ upload_date	Date in YYYYMMDD format
 thumbnail	Max resolution thumbnail URL
 formats.audio	List of audio formats with direct URLs
 
-💡 Use Cases
+# 💡 Use Cases
 Telegram bots for YouTube preview/download
 
 Serverless YouTube metadata fetcher
@@ -85,7 +87,7 @@ Audio extractor for media apps
 
 Data enrichment from YouTube videos
 
-🚀 Deploy Your Own (Optional)
+# 🚀 Deploy Your Own (Optional)
 You can clone this project and deploy on Vercel yourself.
 
 bash
@@ -94,10 +96,11 @@ Edit
 git clone https://github.com/yourname/yt-dlp-vercel-api
 cd yt-dlp-vercel-api
 vercel deploy
-🙋 Support
-For support or questions, reach out via Telegram:
-📬 @bro_bin_lagbe
 
-📜 License
+# 🙋 Support
+For support or questions, reach out via Telegram:
+# 📬 @bro_bin_lagbe
+
+# 📜 License
 This project is intended for educational and personal use only.
 You are responsible for how you use the data fetched via this API.
